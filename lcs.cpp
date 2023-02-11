@@ -5,24 +5,11 @@ using namespace std;
 
 string longestCommonSubstring(string a, string b, int l1, int l2)
 {
-    /*int strLength1;
-    int strLength2;
-
-    if(a.length() == b.length())
-    {
-        strLength1 = strLength2 = a.length() + 1;
-    }
-    else
-    {
-        strLength1 = a.length() + 1;
-        strLength2 = b.length() + 1;
-    }*/
-
     int LCS[l1 + 1][l2 + 1];
     int longest = 0;
     int row;
     int column;
-    string result = "                        ";
+    string result = "                           ";
 
     for(int i = 0; i <= l1; i++)
     {
@@ -73,8 +60,18 @@ int main()
     string a = "abcdde";
     string b = "dabcde";
     
-    int l1 = a.length();
-    int l2 = b.length();
+    int l1;
+    int l2;
+
+    if(a.length() == b.length())
+    {
+        l1 = l2 = a.length() + 1;
+    }
+    else
+    {
+        l1 = a.length() + 1;
+        l2 = b.length() + 1;
+    }
 
     cout << longestCommonSubstring(a, b, l1, l2) << endl;
 
