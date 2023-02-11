@@ -3,9 +3,9 @@
 #include <string.h>
 using namespace std;
 
-string longestCommonSubstring(string a, string b)
+string longestCommonSubstring(string a, string b, int l1, int l2)
 {
-    int strLength1;
+    /*int strLength1;
     int strLength2;
 
     if(a.length() == b.length())
@@ -16,23 +16,23 @@ string longestCommonSubstring(string a, string b)
     {
         strLength1 = a.length() + 1;
         strLength2 = b.length() + 1;
-    }
+    }*/
 
-    int LCS[strLength1][strLength2];
+    int LCS[l1 + 1][l2 + 1];
     int longest = 0;
     int row;
     int column;
-    string result = "";
+    string result = "                        ";
 
-    for(int i = 0; i <= strLength1; i++)
+    for(int i = 0; i <= l1; i++)
     {
-        for(int j = 0; j <= strLength2; j++)
+        for(int j = 0; j <= l2; j++)
         {
             if(i == 0 || j == 0)
             {
                 LCS[i][j] = 0;//makes 1st row and 1st column all 0s
             }
-            else if(a[i -1] == b[j - 1])  
+            else if(a[i - 1] == b[j - 1])  
             {
                 LCS[i][j] = LCS[i - 1][j - 1] + 1; //if chars match, indicate by inc matches by 1
                 if(longest < LCS[i][j])
@@ -49,11 +49,10 @@ string longestCommonSubstring(string a, string b)
         }
     }
 
-    //string result;
-
     if(longest == 0)
     {
         result = "no common substrings";
+        //cout << result << endl;
         return result;
     }
     else
@@ -64,16 +63,20 @@ string longestCommonSubstring(string a, string b)
             row--;
             column--;
         }
+        //cout << result << endl;
         return result;
     }
 }
 
 int main()
 {
-    string a = "hannah";
-    string b = "savana";
+    string a = "abcdde";
+    string b = "dabcde";
     
-    cout << longestCommonSubstring(a, b);
+    int l1 = a.length();
+    int l2 = b.length();
+
+    cout << longestCommonSubstring(a, b, l1, l2) << endl;
 
     return 0;
 }
