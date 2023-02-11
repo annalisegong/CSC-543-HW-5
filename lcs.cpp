@@ -5,8 +5,8 @@ using namespace std;
 
 string longestCommonSubstring(string a, string b, int l1, int l2)
 {
-    int LCS[l1 + 1][l2 + 1];
-    int longest = 0;
+    int LCS[l1 + 1][l2 + 1]; //creates 2D look up table keeps track of previous matches
+    int longest = 0; //tracks length of longest common substring
     int row;
     int column;
     string result = "                           ";
@@ -21,17 +21,17 @@ string longestCommonSubstring(string a, string b, int l1, int l2)
             }
             else if(a[i - 1] == b[j - 1])  
             {
-                LCS[i][j] = LCS[i - 1][j - 1] + 1; //if chars match, indicate by inc matches by 1
-                if(longest < LCS[i][j])
+                LCS[i][j] = LCS[i - 1][j - 1] + 1; //if chars match, record in table by inc previous # of matches by 1
+                if(longest < LCS[i][j]) //if current # of matches > current longest substring
                 {
-                    longest = LCS[i][j];//track longest set of substrings
-                    row = i;
-                    column = j;
+                    longest = LCS[i][j];// updates longest
+                    row = i; //tracks row or longest
+                    column = j;//tracks column of longest
                 }
             }
             else
             {
-                LCS[i][j] = 0;
+                LCS[i][j] = 0; //no matches indicate w 0
             } 
         }
     }
@@ -39,18 +39,17 @@ string longestCommonSubstring(string a, string b, int l1, int l2)
     if(longest == 0)
     {
         result = "no common substrings";
-        //cout << result << endl;
         return result;
     }
     else
     {
+        //traverse look up table diagonally starting at location of longest substring
         while(LCS[row][column] != 0)
         {
-            result[--longest] = a[row -1 ];
+            result[--longest] = a[row -1 ];//stores chars in longest substring (building last to first char)
             row--;
             column--;
         }
-        //cout << result << endl;
         return result;
     }
 }
